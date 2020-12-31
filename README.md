@@ -1,29 +1,23 @@
-# edu-admin-platform
+## 项目介绍
+这是一个和教育相关的管理后台
 
-## Project setup
-```
+## 技术栈
+* Vue
+* Vue-router
+* Vuex
+* Axios
+* TypeScript
+* Sass
+* ElementUI
+
+## 安装运行
+```js
+// 安装依赖包
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+// 运行项目
 yarn run serve
-```
 
-### Compiles and minifies for production
-```
+// 打包项目
 yarn run build
 ```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

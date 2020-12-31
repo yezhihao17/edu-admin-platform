@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>管理后台</h1>
     <!-- 所有路由的出口 -->
     <router-view />
   </div>
@@ -14,4 +13,8 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#app {
+  min-height: 100vh;
+}
+</style>
