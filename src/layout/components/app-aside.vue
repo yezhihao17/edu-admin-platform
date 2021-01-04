@@ -2,8 +2,6 @@
   <el-menu
     default-active="/"
     class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
     background-color="#545c64"
     text-color="#fff"
     router
@@ -57,12 +55,12 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'AppAside',
   methods: {
-    handleOpen (key: string, keyPath: string): void {
-      console.log(key, keyPath)
-    },
-    handleClose (key: string, keyPath: string): void {
-      console.log(key, keyPath)
-    }
+    // handleOpen (key: string, keyPath: string): void {
+    //   console.log(key, keyPath)
+    // },
+    // handleClose (key: string, keyPath: string): void {
+    //   console.log(key, keyPath)
+    // }
   }
 })
 </script>

@@ -1,7 +1,7 @@
 // 用户相关接口
 import qs from 'qs'
 import request from '@/utils/request'
-import apiUrl from '@/utils/apiUrl'
+import { user } from './api'
 
 // 登录
 interface User {
@@ -11,7 +11,23 @@ interface User {
 export const login = (data: User) => {
   return request({
     method: 'POST',
-    url: apiUrl.login,
+    url: user.login,
     data: qs.stringify(data)
+  })
+}
+
+// 退出登录
+export const logout = () => {
+  return request({
+    method: 'POST',
+    url: user.logout
+  })
+}
+
+// 获取用户信息
+export const userInfo = () => {
+  return request({
+    method: 'GET',
+    url: user.userInfo
   })
 }

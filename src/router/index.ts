@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import LayoutIndex from '@/layout/index.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -8,14 +9,14 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: 'login' */ '@/views/login/index.vue'),
-    meta: {
-      title: '登录'
-    }
+    component: () => import(/* webpackChunkName: 'login' */ '@/views/login/index.vue')
   },
   {
     path: '/',
     component: LayoutIndex,
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
@@ -31,6 +32,16 @@ const routes: Array<RouteConfig> = [
         path: '/menu',
         name: 'menu',
         component: () => import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue')
+      },
+      {
+        path: '/create-menu',
+        name: 'create-menu',
+        component: () => import(/* webpackChunkName: 'create-menu' */ '@/views/menu/create-menu.vue')
+      },
+      {
+        path: '/edit-menu',
+        name: 'edit-menu',
+        component: () => import(/* webpackChunkName: 'edit-menu' */ '@/views/menu/edit-menu.vue')
       },
       {
         path: '/resource',
@@ -70,6 +81,25 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// 路由拦截器
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // 判断是否登录
+    if (!store.state.user) {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
 })
 
 export default router

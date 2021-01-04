@@ -25,6 +25,7 @@ module.exports = {
       singleline: {
         requireLast: false
       }
-    }]
+    }],
+    '@typescript-eslint/no-explicit-any': ['off']
   }
 }

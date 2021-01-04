@@ -3,13 +3,17 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import dayjs from 'dayjs'
 // import 'element-ui/lib/theme-chalk/index.css'
-// import vueMeta from 'vue-meta'
 
 import '@/styles/index.scss'
 
 Vue.use(ElementUI)
-// Vue.use(vueMeta)
+
+// 注册全局时间过滤
+Vue.filter('date', (date: string, format = 'YYYY-MM-DD HH:mm:ss') => {
+  return dayjs(date).format(format)
+})
 
 Vue.config.productionTip = false
 

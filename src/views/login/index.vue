@@ -1,27 +1,31 @@
 <template>
   <div class="login">
-    <el-form
-      label-position="top"
-      :model="form"
-      :rules="rules"
-      ref="form"
-      label-width="auto"
-      class="login-form">
-      <el-form-item label="手机" prop="phone">
-        <el-input v-model="form.phone" maxLength="11"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password" maxLength="18">
-        <el-input v-model="form.password"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          class="login-btn"
-          type="primary"
-          :loading="logining"
-          @click="onSubmit"
-        >登录</el-button>
-      </el-form-item>
-    </el-form>
+    <div class="content">
+      <h3 class="title">Edu admin platform</h3>
+
+      <el-form
+        label-position="top"
+        :model="form"
+        :rules="rules"
+        ref="form"
+        label-width="auto"
+        class="login-form">
+        <el-form-item label="手机" prop="phone">
+          <el-input v-model="form.phone" maxLength="11"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password" maxLength="18">
+          <el-input type="password" show-password v-model="form.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            class="login-btn"
+            type="primary"
+            :loading="logining"
+            @click="onSubmit"
+          >登录</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -65,8 +69,11 @@ export default Vue.extend({
           this.$message.error(data.message)
         } else {
           this.$message.success('登录成功')
+          // 设置用户登录信息
+          this.$store.commit('setUser', data.content)
           // 成功后跳转到首页
-          this.$router.push({ name: 'home' })
+          const path = (this.$route.query.redirect || '/') as string
+          this.$router.push(path)
         }
       } catch (err) {
         console.log(err)
@@ -85,14 +92,23 @@ export default Vue.extend({
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  .login-form {
-    width: 300px;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 6px;
-  }
-  .login-btn {
-    width: 100%;
+  .content {
+    min-width: 600px;
+    .title {
+      text-align: center;
+      font-size: 42px;
+      font-weight: 500;
+    }
+    .login-form {
+      width: 300px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 6px;
+      margin: 0 auto;
+    }
+    .login-btn {
+      width: 100%;
+    }
   }
 }
 </style>
