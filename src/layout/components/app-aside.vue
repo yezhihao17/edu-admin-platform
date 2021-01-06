@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="/"
+    :default-active="$route.path"
     class="el-menu-vertical-demo"
     background-color="#545c64"
     text-color="#fff"
@@ -54,13 +54,8 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'AppAside',
-  methods: {
-    // handleOpen (key: string, keyPath: string): void {
-    //   console.log(key, keyPath)
-    // },
-    // handleClose (key: string, keyPath: string): void {
-    //   console.log(key, keyPath)
-    // }
+  created () {
+    console.log(this.$route.path)
   }
 })
 </script>
