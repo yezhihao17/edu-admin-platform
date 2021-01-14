@@ -37,3 +37,11 @@ export const deleteMenu = (id: string | number) => {
     url: `${menu.deleteMenu}${id}`
   })
 }
+
+// 获取所有菜单并按层级展示
+export const menuNodeList = () => {
+  return request({
+    method: 'GET',
+    url: menu.menuNodeList
+  })
+}

@@ -18,6 +18,23 @@ export const queryRoleByUser = (userId: number) => {
   })
 }
 
+// 通过角色 id 查下角色
+export const queryRoleById = (roleId: number | string) => {
+  return request({
+    method: 'GET',
+    url: `${role.queryRoleById}/${roleId}`
+  })
+}
+
+// 保存或更新角色
+export const saveOrUpdate = (data: any) => {
+  return request({
+    method: 'POST',
+    url: role.saveOrUpdate,
+    data
+  })
+}
+
 // 给用户分配角色
 interface AllocateUserRolesData {
   userId: number
@@ -27,6 +44,30 @@ export const allocateUserRoles = (data: AllocateUserRolesData) => {
   return request({
     method: 'POST',
     url: role.allocateUserRoles,
+    data
+  })
+}
+
+// 获取角色菜单
+export const getRoleMenus = (roleId: number | string) => {
+  return request({
+    method: 'GET',
+    url: role.getRoleMenus,
+    params: {
+      roleId
+    }
+  })
+}
+
+// 给用户分配菜单
+interface AllocateRoleMenusData {
+  roleId: number | string
+  menuIdList: number[]
+}
+export const allocateRoleMenus = (data: AllocateRoleMenusData) => {
+  return request({
+    method: 'POST',
+    url: role.allocateRoleMenus,
     data
   })
 }

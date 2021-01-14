@@ -22,7 +22,11 @@ export const menu = {
 export const role = {
   allRoles: '/boss/role/all', // 获取全部角色用户列表
   queryUserByUser: '/boss/role/user', // 查询用户角色
-  allocateUserRoles: '/boss/role/allocateUserRoles' // 给用户分配角色
+  queryRoleById: '/boss/role', // 获取角色
+  saveOrUpdate: '/boss/role/saveOrUpdate', // 保存或更新角色信息
+  allocateUserRoles: '/boss/role/allocateUserRoles', // 给用户分配角色
+  getRoleMenus: '/boss/menu/getRoleMenus', // 获取角色菜单
+  allocateRoleMenus: '/boss/menu/allocateRoleMenus' // 给角色分配菜单
 }
 
 // 课程相关接口
@@ -35,4 +39,10 @@ export const course = {
 // 通用接口
 export const common = {
   uploadImage: '/boss/course/upload' // 上传图片
+}
+
+// 资源相关接口
+export const resource = {
+  getAllCategory: '/boss/resource/category/getAll', // 查询资源分类列表
+  getAll: '/boss/resource/getAll' // 获取所有资源数据
 }
