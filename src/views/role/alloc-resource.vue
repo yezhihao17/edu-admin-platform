@@ -11,28 +11,24 @@
           class="table-layout"
           :class="{'top-border': index === 0}">
           <el-checkbox
-            :indeterminate="category.indeterminate"
+            :indeterminate="category.isIndeterminate"
             v-model="category.selected"
-            @change="handleCheckAllChange">
-            {{ category.name }}
+            :label="category.name"
+            @change="handleCheckAllChange(category)">
           </el-checkbox>
         </el-row>
         <el-row class="table-layout">
-          <el-checkbox-group
-            v-model="checkedIds"
-            @change="handleCheckChange">
-            <el-col
-              v-for="resource in category.subResourceList"
-              :key="resource.id"
-              :span="8">
-              <el-checkbox
-                :key="resource.id"
-                :label="resource.id"
-                style="padding: 4px 0;">
-                {{ resource.name }}
-              </el-checkbox>
-            </el-col>
-          </el-checkbox-group>
+          <el-col
+            v-for="resource in category.resourceList"
+            :key="resource.id"
+            :span="8">
+            <el-checkbox
+              v-model="resource.selected"
+              style="padding: 4px 0;"
+              :label="resource.name"
+              @change="handleCheckChange(category, $event)">
+            </el-checkbox>
+          </el-col>
         </el-row>
       </div>
       <div class="btns-wrapper">
@@ -45,13 +41,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { getRoleResources } from '@/services/role'
 import { getAll, getAllCategory } from '@/services/resource'
 
 export default Vue.extend({
   name: 'AllocResourceIndex',
+  props: {
+    roleId: {
+      type: [String, Number]
+    }
+  },
   data () {
     return {
       resources: [],
+      categorys: [],
       checkedIds: []
     }
   },
@@ -60,37 +63,95 @@ export default Vue.extend({
     async getAll () {
       const { data } = await getAll()
       this.getResourceCategoryList(data.data)
+      this.getRoleResources()
     },
 
     // 获取分类资源列表
     async getAllCategory () {
       const { data } = await getAllCategory('')
-      this.resources = data.data
+      // this.resources = data.data
+      this.categorys = data.data
       this.getAll()
+    },
+
+    // 获取用户的资源列表
+    async getRoleResources () {
+      const { data } = await getRoleResources(this.roleId)
+      this.getRoleResourceIds(data.data)
     },
 
     // 获取资源分类列表
     getResourceCategoryList (data: any) {
-      (this.resources as any) = this.resources.map((category: any) => {
-        category.indeterminate = false
-        category.subResourceList = data.filter((resource: any) => resource.categoryId === category.id)
+      (this.categorys as any) = this.categorys.map((category: any) => {
+        category.isIndeterminate = false
+        category.resourceList = data.filter((resource: any) => resource.categoryId === category.id)
         return category
       })
     },
+
+    // 获取用户选中的资源
+    getRoleResourceIds (resources: any) {
+      (this.resources as any) = this.categorys.map((r: any) => {
+        resources.forEach((category: any) => {
+          if (r.id === category.id && !category.resourceList) {
+            r = Object.assign(r, category)
+          } else if (r.id === category.id && category.resourceList) {
+            this.setResourceList(r, category)
+          }
+        })
+        return r
+      })
+    },
+
+    // 处理子列表和 isIndeterminate 数据
+    setResourceList (r: any, category: any) {
+      let count = 0
+      r.resourceList = r.resourceList.map((item: any, index: number) => {
+        category.resourceList.forEach((categoryItem: any) => {
+          if (item.id === categoryItem.id && categoryItem.selected) {
+            count++
+            item.selected = true
+          }
+        })
+        this.$set(r, index, item)
+        return item
+      })
+      r.isIndeterminate = count > 0 && count < r.resourceList.length
+      r.selected = count > 0 && count === r.resourceList.length
+    },
+
+    // 清空
     resetChecked () {
       console.log('清空')
     },
+
+    // 保存
     onSave () {
       console.log('保存')
     },
+
     // 全选
     handleCheckAllChange (category: any) {
-      console.log(category)
+      category.isIndeterminate = false
+      if (category.resourceList) {
+        category.resourceList = category.resourceList.map((item: any) => {
+          item.selected = category.selected
+          return item
+        })
+      }
     },
 
     // 单选
-    handleCheckChange (resource: any) {
-      console.log(resource)
+    handleCheckChange (category: any) {
+      let count = 0
+      const categoryCount = category.resourceList.length
+      category.resourceList.forEach((item: any) => {
+        if (item.selected) {
+          count++
+        }
+      })
+      category.selected = count > 0 && count === categoryCount
+      category.isIndeterminate = count > 0 && count < categoryCount
     }
   },
   created () {

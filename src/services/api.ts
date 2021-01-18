@@ -26,7 +26,8 @@ export const role = {
   saveOrUpdate: '/boss/role/saveOrUpdate', // 保存或更新角色信息
   allocateUserRoles: '/boss/role/allocateUserRoles', // 给用户分配角色
   getRoleMenus: '/boss/menu/getRoleMenus', // 获取角色菜单
-  allocateRoleMenus: '/boss/menu/allocateRoleMenus' // 给角色分配菜单
+  allocateRoleMenus: '/boss/menu/allocateRoleMenus', // 给角色分配菜单
+  getRoleResources: '/boss/resource/getRoleResources' // 给角色分配的资源
 }
 
 // 课程相关接口

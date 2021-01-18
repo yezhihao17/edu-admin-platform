@@ -71,3 +71,14 @@ export const allocateRoleMenus = (data: AllocateRoleMenusData) => {
     data
   })
 }
+
+// 给用户分配的资源
+export const getRoleResources = (roleId: string | number) => {
+  return request({
+    method: 'GET',
+    url: role.getRoleResources,
+    params: {
+      roleId
+    }
+  })
+}
