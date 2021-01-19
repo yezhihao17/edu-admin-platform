@@ -10,6 +10,14 @@
 * Sass
 * ElementUI
 
+## 接口地址
+[edu-boss-boot](http://113.31.105.128/boss/doc.html#/home)
+[edu-front-boot](http://113.31.105.128/front/doc.html#/home)
+
+## 账号
+18201288771
+111111
+
 ## 安装运行
 ```js
 // 安装依赖包

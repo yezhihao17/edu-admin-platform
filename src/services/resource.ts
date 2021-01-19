@@ -20,3 +20,24 @@ export const getAllCategory = (resourceId: string | number) => {
     }
   })
 }
+
+// // 保存或更新资源
+// export const saveOrUpdate = () => {
+//   return request({
+//     method: 'POST',
+//     url: resource.saveOrUpdate
+//   })
+// }
+
+// 给角色分配资源
+interface AllocateRoleResources {
+  roleId: number | string
+  resourceIdList: any[]
+}
+export const allocateRoleResources = (data: AllocateRoleResources) => {
+  return request({
+    method: 'POST',
+    url: resource.allocateRoleResources,
+    data
+  })
+}

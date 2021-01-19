@@ -45,5 +45,7 @@ export const common = {
 // 资源相关接口
 export const resource = {
   getAllCategory: '/boss/resource/category/getAll', // 查询资源分类列表
-  getAll: '/boss/resource/getAll' // 获取所有资源数据
+  getAll: '/boss/resource/getAll', // 获取所有资源数据
+  saveOrUpdate: '/boss/resource/saveOrUpdate', // 保存或者更新资源
+  allocateRoleResources: '/boss/resource/allocateRoleResources' // 给角色分配资源
 }
