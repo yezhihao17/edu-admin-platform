@@ -11,7 +11,8 @@
         node-key="id"
         default-expand-all
         :default-checked-keys="checkedKeys"
-        :props="defaultProps">
+        :props="defaultProps"
+        v-loading="isLoading">
       </el-tree>
       <div style="text-align: center">
         <el-button @click="resetChecked">清空</el-button>
@@ -31,6 +32,7 @@ export default Vue.extend({
   name: 'AllocMenuIndex',
   data () {
     return {
+      isLoading: false,
       roles: [],
       checkedKeys: [], // 选中的菜单 id
       defaultProps: {
@@ -47,8 +49,10 @@ export default Vue.extend({
   methods: {
     // 获取所有菜单列表
     async queryMenuNodeList () {
+      this.isLoading = true
       const { data } = await menuNodeList()
       this.roles = data.data
+      this.isLoading = false
     },
 
     // 获取角色拥有的菜单列表

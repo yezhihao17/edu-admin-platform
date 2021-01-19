@@ -47,5 +47,9 @@ export const resource = {
   getAllCategory: '/boss/resource/category/getAll', // 查询资源分类列表
   getAll: '/boss/resource/getAll', // 获取所有资源数据
   saveOrUpdate: '/boss/resource/saveOrUpdate', // 保存或者更新资源
-  allocateRoleResources: '/boss/resource/allocateRoleResources' // 给角色分配资源
+  allocateRoleResources: '/boss/resource/allocateRoleResources', // 给角色分配资源
+  getResourcePages: '/boss/resource/getResourcePages', // 分页查询资源
+  resource: '/boss/resource', // 获取资源
+  saveOrderUpdate: '/boss/resource/category/saveOrderUpdate', // 保存或更新分类
+  category: '/boss/resource/category' // 删除资源
 }

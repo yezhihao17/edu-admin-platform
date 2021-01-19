@@ -7,7 +7,8 @@
       <el-table
         :data="roles"
         :border="true"
-        style="width: 100%">
+        style="width: 100%"
+        v-loading="isLoading">
         <el-table-column
           label="编号"
           type="index"
@@ -84,6 +85,7 @@ export default Vue.extend({
   name: 'RoleIndex',
   data () {
     return {
+      isLoading: false,
       roles: [], // 角色列表
       dialogVisible: false,
       isEdit: false, // 判断是否编辑还是添加
@@ -93,10 +95,12 @@ export default Vue.extend({
   methods: {
     // 获取全部角色列表
     async getAllRoles () {
+      this.isLoading = true
       const { data } = await allRoles()
       if (data.code === '000000') {
         this.roles = data.data
       }
+      this.isLoading = false
     },
     // 分配菜单
     handleAllocMenu (row: any) {
