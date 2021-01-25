@@ -1,5 +1,11 @@
 <template>
   <div class="app-header">
+    <el-button
+      icon="el-icon-s-fold"
+      type="text"
+      class="taggle"
+      @click="taggle">
+    </el-button>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>活动管理</el-breadcrumb-item>
@@ -8,10 +14,8 @@
     <el-dropdown>
       <span class="el-dropdown-link">
         <el-avatar size="large" :src="userInfo.portrait"></el-avatar>
-        <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
       </span>
       <el-dropdown-menu slot="dropdown">
-        <!-- <el-dropdown-item>个人中心</el-dropdown-item> -->
         <el-dropdown-item>{{ userInfo.userName }}</el-dropdown-item>
         <el-dropdown-item divided @click.native="postLogout">退出</el-dropdown-item>
       </el-dropdown-menu>
@@ -42,6 +46,7 @@ export default Vue.extend({
         this.userInfo = data.content
       }
     },
+
     // 退出登录
     async postLogout () {
       if (this.loading) return
@@ -60,6 +65,11 @@ export default Vue.extend({
 
       // 重置正在退出状态
       this.loading = false
+    },
+
+    // 显示/隐藏侧边栏
+    taggle () {
+      this.$emit('taggle')
     }
   }
 })
@@ -69,8 +79,16 @@ export default Vue.extend({
 .app-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
   height: 100%;
+  .taggle {
+    font-size: 20px;
+    border: 0;
+    box-sizing: border-box;
+    padding: 15px;
+    margin-right: 10px;
+  }
+  .el-dropdown {
+    margin-left: auto;
+  }
 }
 </style>

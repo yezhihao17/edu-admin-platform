@@ -27,3 +27,12 @@ export const courseDetail = (id: number | string) => {
     }
   })
 }
+
+// 更新或者保存课程
+export const saveOrUpdateCourse = (data: any) => {
+  return request({
+    method: 'POST',
+    url: course.saveOrUpdateCourse,
+    data
+  })
+}

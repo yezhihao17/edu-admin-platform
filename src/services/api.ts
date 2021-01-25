@@ -34,6 +34,7 @@ export const role = {
 export const course = {
   courseList: '/boss/course/getQueryCourses', // 获取课程列表信息
   courseDetail: '/boss/course/getCourseById', // 通过 id 获取课程详情
+  saveOrUpdateCourse: '/boss/course/saveOrUpdateCourse', // 更新或者保存课程
   test: ''
 }
 

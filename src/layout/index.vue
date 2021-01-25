@@ -1,12 +1,12 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside width="200px">
-        <app-aside />
+      <el-aside width="auto">
+        <app-aside :collapse="collapse" />
       </el-aside>
       <el-container>
-        <el-header>
-          <app-header />
+        <el-header height="auto">
+          <app-header @taggle="taggle" />
         </el-header>
         <el-main>
           <router-view />
@@ -31,6 +31,16 @@ export default Vue.extend({
     AppAside,
     AppHeader,
     AppFooter
+  },
+  data () {
+    return {
+      collapse: false
+    }
+  },
+  methods: {
+    taggle () {
+      this.collapse = !this.collapse
+    }
   }
 })
 </script>
@@ -39,6 +49,7 @@ export default Vue.extend({
 .el-container {
   .el-header {
     background-color: #fff;
+    padding: 0;
   }
 
   .el-footer {

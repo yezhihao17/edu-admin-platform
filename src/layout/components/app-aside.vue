@@ -5,7 +5,8 @@
     background-color="#545c64"
     text-color="#fff"
     router
-    active-text-color="#ffd04b">
+    active-text-color="#ffd04b"
+    :collapse="collapse">
     <el-submenu index="1" :route="{ name: 'home' }">
       <template slot="title">
         <i class="el-icon-lock"></i>
@@ -54,8 +55,11 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'AppAside',
-  created () {
-    console.log(this.$route.path)
+  props: {
+    collapse: {
+      type: Boolean,
+      default: false
+    }
   }
 })
 </script>

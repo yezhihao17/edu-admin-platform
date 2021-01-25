@@ -1,6 +1,6 @@
 <template>
   <div class="edit-course">
-    <edit-course />
+    <edit-course :is-edit="true" />
   </div>
 </template>
 
