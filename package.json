@@ -5,13 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "nodemon ./server/app.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.8.1",
     "dayjs": "^1.10.4",
     "element-ui": "^2.14.1",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
+    "nodemon": "^2.0.7",
     "qs": "^6.9.4",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

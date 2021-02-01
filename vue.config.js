@@ -1,5 +1,6 @@
 // vue.config.js
 module.exports = {
+  // publicPath: '/dist',
   // 设置公共的 scss 模块
   css: {
     loaderOptions: {
