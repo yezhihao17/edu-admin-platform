@@ -54,6 +54,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /www/edu-admit-platform
+            cd /root/www/edu-admin-platform
             wget https://github.com/yezhihao17/edu-admin-platform/releases/latest/download/release.tgz -O release.tgz
             tar zxvf release.tgz
