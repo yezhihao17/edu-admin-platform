@@ -2,8 +2,8 @@ name: Publish And Deploy
 
 on: 
   push: 
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 jobs:
   build-and-deploy:
@@ -17,9 +17,33 @@ jobs:
       # 安装依赖，并且打包
       - name: Build
         uses: actions/setup-node@master
-      - run: |
-          yarn install
-          yarn run build
+      - run: yarn install
+      - run: yarn run build
+      - run: tar -zcvf release.tgz dist server package.json vue.config.js yarn.lock
+
+      # 发布 Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      # 上传构建结果到 Release
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release.tgz
+          asset_name: release.tgz
+          asset_content_type: application/x-tgz
 
       # 发布到服务器上
       - name: Deploy
@@ -29,8 +53,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-        # script: 
-        #   cd /root/www/edu-admit-platform
+        script: 
+          cd /root/www/edu-admit-platform
+          wget https://github.com/yezhihao17/edu-admin-platform/releases/latest/download/release.tgz -O release.tgz
+          tar zxvf release.tgz
 
 # name: Publish And Deploy Demo
 # # 触发该流程的方式
