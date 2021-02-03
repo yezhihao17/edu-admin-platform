@@ -16,6 +16,6 @@ app.use('/front', createProxyMiddleware({
   changeOrigin: true
 }))
 
-app.listen('3000', () => {
+app.listen('3017', () => {
   console.log('服务器启动成功')
 })
