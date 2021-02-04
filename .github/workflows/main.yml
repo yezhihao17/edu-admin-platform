@@ -57,3 +57,5 @@ jobs:
             cd /root/www/edu-admin-platform
             wget https://github.com/yezhihao17/edu-admin-platform/releases/latest/download/release.tgz -O release.tgz
             tar zxvf release.tgz
+            yarn install
+            pm2 reload pm2.config.json

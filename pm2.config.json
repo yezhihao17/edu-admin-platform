@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "EduAdminPlatform",
+      "scripts": "npm",
+      "args": "node"
+    }
+  ]
+}
