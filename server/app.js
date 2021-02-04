@@ -1,6 +1,6 @@
-const express = require('express')
-const path = require('path')
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const express = require('express') // eslint-disable-line
+const path = require('path') // eslint-disable-line
+const { createProxyMiddleware } = require('http-proxy-middleware') // eslint-disable-line
 const app = express()
 
 // 设置静态资源
